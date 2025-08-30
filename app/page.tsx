@@ -132,7 +132,7 @@ export default function Home() {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-8 h-8 ${i < Math.round(ratingData.average)
+                    className={`w-6 h-6 ${i < Math.round(ratingData.average)
                       ? "fill-green-400 text-yellow-300"
                       : "text-yellow-300/40"
                       }`}
@@ -140,30 +140,13 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Breakdown bars */}
-              <div className="mt-3 w-full space-y-1 text-xs">
-                {[5, 4, 3, 2, 1].map((star, idx) => (
-                  <div key={star} className="flex items-center gap-2">
-                    <span className="w-4">{star}★</span>
-                    <div className="flex-1 bg-black/30 rounded-full h-1.5">
-                      <div
-                        className="h-1.5 rounded-full bg-yellow-300"
-                        style={{ width: `${ratingData.breakdown[idx]}%` }}
-                      ></div>
-                    </div>
-                    <span className="w-8 text-right opacity-80">
-                      {ratingData.breakdown[idx]}%
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className="container py-20">
+      <section className="container py-12">
         <h2 className="text-4xl font-bold text-center mb-6 text-gray-800">
           How It Works
         </h2>
@@ -177,32 +160,41 @@ export default function Home() {
         <div className="mb-16">
           <Swiper
             modules={[Pagination, Autoplay]}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3000 }}
+            pagination={{
+              clickable: true,
+              bulletClass: "swiper-pagination-bullet !bg-gray-400",
+              bulletActiveClass: "swiper-pagination-bullet-active !bg-blue-600",
+            }}
+            autoplay={{ delay: 3500 }}
             loop={true}
-            className="rounded-2xl shadow-xl overflow-hidden"
+            className="rounded-3xl shadow-2xl overflow-hidden"
           >
-            <SwiperSlide>
-              <img
-                src="/posters/poster1.jpg"
-                alt="Poster 1"
-                className="w-full h-72 object-cover"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="/posters/poster2.jpg"
-                alt="Poster 2"
-                className="w-full h-72 object-cover"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="/posters/poster3.jpg"
-                alt="Poster 3"
-                className="w-full h-72 object-cover"
-              />
-            </SwiperSlide>
+            {[
+              { src: "/posters/poster1.jpg", alt: "Hire Trusted Workers", caption: "Hire Verified Workers Easily" },
+              { src: "/posters/poster2.jpg", alt: "Book Jobs Instantly", caption: "Instant Job Booking & Secure Payment" },
+              { src: "/posters/poster3.jpg", alt: "Earn with Dignity", caption: "Empowering Workers Across India" },
+            ].map((slide, i) => (
+              <SwiperSlide key={i}>
+                <div className="relative group">
+                  {/* Background Image */}
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    className="w-full h-[35rem] md:h-[28rem] object-cover transform g transition duration-700"
+                  />
+
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+                  {/* Caption */}
+                  <div className="absolute bottom-6 left-6 text-green-400 max-w-lg">
+                    <h3 className="text-xl md:text-2xl font-bold drop-shadow-lg">
+                      {slide.caption}
+                    </h3>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
 
@@ -284,64 +276,81 @@ export default function Home() {
 
 
       {/* Footer */}
-      <footer className="bg-gray-700 text-gray-300 py-10">
-        <div className="container grid md:grid-cols-4 gap-8">
+      <footer className="bg-gray-800 text-gray-300 py-10">
+        <div className="container">
           {/* Logo + Intro */}
-          <div>
-            <div className="flex items-center gap-2 font-semibold text-white text-xl">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="flex items-center gap-2 font-semibold text-white text-2xl">
               <Image
                 src="/logo.png"
                 alt="Workkerz Logo"
-                width={60}
-                height={60}
+                width={55}
+                height={55}
                 className="rounded-xl"
               />
               <span>Workkerz</span>
             </div>
-            <p className="mt-2 text-lg">
-              India's trusted on-demand labor platform
+            <p className="mt-2 text-sm md:text-base max-w-xs md:max-w-sm">
+              India's trusted on-demand labor platform.
             </p>
           </div>
 
-          {/* For Customers */}
-          <div>
-            <h4 className="font-semibold text-white mb-3">For Customers</h4>
-            <ul className="space-y-2 text-sm">
-              <li>Book Services</li>
-              <li>Track Orders</li>
-              <li>Customer Support</li>
-              <li>Help Center</li>
-            </ul>
+          {/* Links Section */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-10 text-center md:text-left">
+            {/* For Customers */}
+            <div>
+              <h4 className="font-semibold text-white mb-3">For Customers</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#">Book Services</a></li>
+                <li><a href="#">Track Orders</a></li>
+                <li><a href="#">Customer Support</a></li>
+                <li><a href="#">Help Center</a></li>
+              </ul>
+            </div>
+
+            {/* For Workers */}
+            <div>
+              <h4 className="font-semibold text-white mb-3">For Workers</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#">Join Platform</a></li>
+                <li><a href="#">Earn Money</a></li>
+                <li><a href="#">Worker Support</a></li>
+                <li><a href="#">Training Resources</a></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="font-semibold text-white mb-3">Company</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h4 className="font-semibold text-white mb-3">Follow Us</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Instagram</a></li>
+              </ul>
+            </div>
           </div>
 
-          {/* For Workers */}
-          <div>
-            <h4 className="font-semibold text-white mb-3">For Workers</h4>
-            <ul className="space-y-2 text-sm">
-              <li>Join Platform</li>
-              <li>Earn Money</li>
-              <li>Worker Support</li>
-              <li>Training Resources</li>
-            </ul>
+          {/* Divider */}
+          <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm md:text-base">
+            © {new Date().getFullYear()} <span className="font-semibold text-white">Workkerz.com</span> — All rights reserved.
+            <br className="md:hidden" />
+            Made with ❤️ for India's workforce.
           </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-semibold text-white mb-3">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li>About Us</li>
-              <li>Careers</li>
-              <li>Privacy Policy</li>
-              <li>Terms of Service</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-6 text-center text-lg text-gray-300">
-          © {new Date().getFullYear()} Workkerz.com All rights reserved. Made with ❤️
-          for India's workforce.
         </div>
       </footer>
+
     </>
   );
 }
