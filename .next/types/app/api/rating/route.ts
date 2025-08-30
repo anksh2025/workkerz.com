@@ -1,4 +1,4 @@
-// File: C:\Users\bijol\Downloads\workkerz-app\workkerz-app\app\api\rating\route.ts
+// File: D:\Hostinger\workkerz-app\workkerz-app\app\api\rating\route.ts
 import * as entry from '../../../../../app/api/rating/route.js'
 import type { NextRequest } from 'next/server.js'
 

@@ -1,4 +1,4 @@
-// File: C:\Users\bijol\Downloads\workkerz-app\workkerz-app\app\layout.tsx
+// File: D:\Hostinger\workkerz-app\workkerz-app\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
