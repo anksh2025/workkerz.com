@@ -251,17 +251,24 @@ export default function Dashboard() {
 
   // 4) Live subscription
   useEffect(() => {
-    fetchContact();
-    const channel = supabase
-      .channel("contacts_changes")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "contacts" },
-        () => fetchContact()
-      )
-      .subscribe();
-    return () => supabase.removeChannel(channel);
-  }, []);
+  let isMounted = true;
+
+  fetchContact();
+
+  const channel = supabase
+    .channel("contacts_changes")
+    .on("postgres_changes", { event: "*", schema: "public", table: "contacts" }, () => {
+      if (isMounted) fetchContact();
+    })
+    .subscribe();
+
+  return () => {
+    isMounted = false;
+    // call async but don’t return it
+    supabase.removeChannel(channel).catch(console.error);
+  };
+}, []);
+
 
   // 5) Helper for timestamps (works with any column name)
   const getTs = (c: Contact) => c.created_at ?? c.inserted_at ?? c.createdAt ?? null;
