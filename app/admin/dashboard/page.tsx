@@ -270,6 +270,7 @@ export default function Dashboard() {
 }, []);
 
 
+
   // 5) Helper for timestamps (works with any column name)
   const getTs = (c: Contact) => c.created_at ?? c.inserted_at ?? c.createdAt ?? null;
 
