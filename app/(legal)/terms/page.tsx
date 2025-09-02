@@ -245,7 +245,7 @@ export default function TermsOfServicePage() {
                     <Section id="privacy" title="9. Data & Privacy">
                         <p>
                             Your data is handled as per our{" "}
-                            <Link href="/privacy" className="text-blue-600 hover:underline">
+                            <Link href="/privacy-policy" className="text-blue-600 hover:underline">
                                 Privacy Policy
                             </Link>
                             . By using the Platform, you consent to data collection and use as
@@ -380,3 +380,4 @@ function Section({
         </section>
     );
 }
+
