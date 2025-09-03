@@ -315,7 +315,7 @@ export default function TermsOfServicePage() {
                             By continuing to use Workkerz.com, you acknowledge you have read and agree
                             to these Terms. If you have questions,{" "}
                             <a
-                                href="mhttps://mail.google.com/mail/?view=cm&fs=1&to=workkerz.com@gmail.com&su=Workkerz%20Inquiry&body=Hello%20Workkerz%20Team,"
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=workkerz.com@gmail.com&su=Workkerz%20Inquiry&body=Hello%20Workkerz%20Team,"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-600 hover:underline"
@@ -380,3 +380,4 @@ function Section({
         </section>
     );
 }
+
